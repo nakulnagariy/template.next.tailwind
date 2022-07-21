@@ -1,4 +1,5 @@
 module.exports = {
+  darkMode: "class", // or 'media' or 'class'
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -23,8 +24,6 @@ module.exports = {
         'orange': '#ff7849',
         'green': '#13ce66',
         'yellow': '#ffc82c',
-        'gray-dark': '#273444',
-        'gray': '#8492a6',
         'gray-light': '#d3dce6',
         'brown': {
           '50': '#fdf8f6',

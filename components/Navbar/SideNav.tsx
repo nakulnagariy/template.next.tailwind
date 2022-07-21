@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState } from "react";
 import { Badge, Button, Sidebar } from "flowbite-react";
 import {
@@ -23,7 +21,7 @@ const SideNav = () => {
     <div>
       <Sidebar
         aria-label='Sidebar with call to action button example'
-        className='!bg-gray-50 dark:!bg-gray-900'
+        className='dark:text-gray-100'
         collapsed={collapsed}
         >
         <Sidebar.Items>
