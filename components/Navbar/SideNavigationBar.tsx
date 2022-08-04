@@ -10,8 +10,8 @@ import {
   HiTable,
   HiMenu,
 } from "react-icons/hi";
-const SideNav = () => {
-    const [collapsed, setCollapsed] = useState(false)
+const SideNavigationBar = () => {
+    const [collapsed, setCollapsed] = useState(true)
 
     const handleCollapse = () => {
         setCollapsed(!collapsed)
@@ -21,7 +21,7 @@ const SideNav = () => {
     <div>
       <Sidebar
         aria-label='Sidebar with call to action button example'
-        className='dark:text-gray-100'
+        className='h-screen sticky top-14 dark:text-gray-100'
         collapsed={collapsed}
         >
         <Sidebar.Items>
@@ -88,4 +88,4 @@ const SideNav = () => {
   );
 };
 
-export default SideNav;
+export default SideNavigationBar;
