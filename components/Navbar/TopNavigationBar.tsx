@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
 import { useTheme } from "next-themes";
 import { SunIcon, MoonIcon } from "@heroicons/react/solid";
-import { useRouter } from "next/router";
-import Link from "next/link";
 
 const TopNavigationBar = () => {
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const router = useRouter();
+  const [menuOpen, setMenuOpen] = React.useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -36,61 +32,60 @@ const TopNavigationBar = () => {
     }
   };
   return (
-    <div>
-      <Navbar fluid className='fixed top-0 left-0 right-0 z-10 dark:bg-red-800'>
-        <Navbar.Brand href='/'>
-          <img
-            src='https://flowbite.com/docs/images/logo.svg'
-            className='mr-3 h-6 sm:h-9'
-            alt='Flowbite Logo'
-          />
-          <span className='self-center whitespace-nowrap text-xl font-semibold dark:text-gray-100'>
-            Flowbite
-          </span>
-        </Navbar.Brand>
-        <div className='flex md:order-2 dark:text-gray-100'>
-          <Dropdown
-            arrowIcon={false}
-            inline
-            label={
-              <Avatar
-                alt='User settings'
-                img='https://flowbite.com/docs/images/people/profile-picture-5.jpg'
-                rounded
-              />
-            }>
-            <Dropdown.Header>
-              <span className='block text-sm'>Bonnie Green</span>
-              <span className='block truncate text-sm font-medium'>
-                name@flowbite.com
-              </span>
-            </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
-            <Dropdown.Item>Earnings</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
-          </Dropdown>
-          <Navbar.Toggle />
-          {renderThemeChanger()}
+    <>
+      <div className='flex flex-wrap'>
+        <div className='w-full'>
+          <nav className='relative flex flex-wrap items-center justify-between px-2 py-3 bg-black'>
+            <div className='container px-4 mx-auto flex flex-wrap items-center justify-between'>
+              <div className='w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start'>
+                <a
+                  className='text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white'
+                  href='#pablo'>
+                  pink Starter Menu
+                </a>
+                <button
+                  className='text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none'
+                  type='button'
+                  onClick={() => setMenuOpen(!menuOpen)}>
+                  <i className='fas fa-bars'></i>
+                </button>
+              </div>
+              <div
+                className={
+                  "lg:flex flex-grow items-center" +
+                  (menuOpen ? " flex" : " hidden")
+                }
+                id='example-navbar-info'>
+                <ul className='flex flex-col lg:flex-row list-none lg:ml-auto'>
+                  <li className='nav-item'>
+                    <a
+                      className='px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75'
+                      href='#pablo'>
+                      <i className='fas fa-globe text-lg leading-lg text-white opacity-75'></i>
+                    </a>
+                  </li>
+                  <li className='nav-item'>
+                    <a
+                      className='px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75'
+                      href='#pablo'>
+                      <i className='fas fa-user text-lg leading-lg text-white opacity-75'></i>
+                    </a>
+                  </li>
+                  <li className='nav-item'>
+                    <a
+                      className='px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75'
+                      href='#pablo'>
+                      <i className='fas fa-cog text-lg leading-lg text-white opacity-75'></i>
+                    </a>
+                  </li>
+                </ul>
+                {renderThemeChanger()}
+              </div>
+            </div>
+          </nav>
         </div>
-        <Navbar.Collapse>
-          <Link href={"/"}>
-            <a className={router.pathname === "/" ? "active" : ""}>Home</a>
-          </Link>
-          <Link href={"/about"}>
-            <a className={router.pathname === "/about" ? "active" : ""}>
-              About
-            </a>
-          </Link>
-          <Link href={"/contact"}>
-            <a className={router.pathname === "/contact" ? "active" : ""}>
-              Contact
-            </a>
-          </Link>
-        </Navbar.Collapse>
-      </Navbar>
-    </div>
+      </div>
+    </>
   );
 };
 
