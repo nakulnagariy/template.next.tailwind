@@ -1,14 +1,26 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
-import Head from 'next/head'
-import Script from 'next/script'
-import "../styles/globals.css";
+import Head from 'next/head';
+import { ConfigProvider } from "antd";
+import "antd/dist/reset.css";
 import "tailwindcss/tailwind.css";
+import "../styles/globals.css";
+// styles
 
-import { config } from '@fortawesome/fontawesome-svg-core'
+import "../components/TransferList/TransferList.scss"
+import '../components/Navbar/Sidebar.scss';
+import '../components/Footer/Footer.scss';
+
+import { config, library } from "@fortawesome/fontawesome-svg-core";
 import '@fortawesome/fontawesome-svg-core/styles.css'
+// Fontawesome icons
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+
+// icons
 config.autoAddCss = false
+library.add(fas, far);
 
 import Layout from "../sections/Layout";
 
@@ -16,13 +28,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <script src="https://kit.fontawesome.com/64805d2996.js" crossOrigin="anonymous"></script>
+        {/* <script src="https://kit.fontawesome.com/64805d2996.js" crossOrigin="anonymous"></script> */}
       </Head>
-      <ThemeProvider enableSystem={true} attribute='class'>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-      </ThemeProvider>
+      <ConfigProvider direction="rtl">
+        <ThemeProvider enableSystem={true} attribute='class'>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+        </ThemeProvider>
+      </ConfigProvider>
     </>
   );
 }

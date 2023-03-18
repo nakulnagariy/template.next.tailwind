@@ -1,9 +1,11 @@
 import type { NextPage } from "next";
-import Login from "../components/Login/Login";
+import Hero from "../components/Hero/Hero";
 
 const Home: NextPage = () => {
   return (
-    <section id='testimonials' aria-label='What our customers are saying'>
+    <>
+    <section>
+      <Hero imageSrc="/wallet.jpg" ctaLink="/add-new-expense" ctaText="Add new Expense"/>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <div className='mx-auto max-w-2xl md:text-center '>
           <h1 className='font-display text-5xl tracking-tight text-slate-700 dark:text-white sm:text-5xl mb-4'>
@@ -108,6 +110,7 @@ const Home: NextPage = () => {
         </ul>
       </div>
     </section>
+    </>
   );
 };
 

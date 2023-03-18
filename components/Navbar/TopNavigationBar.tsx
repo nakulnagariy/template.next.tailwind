@@ -1,24 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
-import { SunIcon, MoonIcon } from "@heroicons/react/solid";
+import React, { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
+import { SunIcon, MoonIcon } from '@heroicons/react/solid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
+import Logo from '../Logo/Logo';
 
-const TopNavigationBar = () => {
+interface TopNavigationBarProps {
+  openSideBar: () => void;
+}
+
+const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ openSideBar }) => {
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [menuOpen, setMenuOpen] = React.useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const renderThemeChanger = () => {
     if (!mounted) return null;
-    const currentTheme = theme === "system" ? systemTheme : theme;
-    if (currentTheme === "dark") {
+    const currentTheme = theme === 'system' ? systemTheme : theme;
+    if (currentTheme === 'dark') {
       return (
         <SunIcon
           className='w-8 h-8 ml-2 text-yellow-500 '
           role='button'
-          onClick={() => setTheme("light")}
+          onClick={() => setTheme('light')}
         />
       );
     } else {
@@ -26,61 +33,46 @@ const TopNavigationBar = () => {
         <MoonIcon
           className='w-8 h-8 ml-2 text-gray-900 '
           role='button'
-          onClick={() => setTheme("dark")}
+          onClick={() => setTheme('dark')}
         />
       );
     }
   };
   return (
     <>
-      <div className='flex flex-wrap'>
-        <div className='w-full'>
-          <nav className='relative flex flex-wrap items-center justify-between px-2 py-3 bg-black'>
-            <div className='container px-4 mx-auto flex flex-wrap items-center justify-between'>
-              <div className='w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start'>
-                <a
-                  className='text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white'
-                  href='#pablo'>
-                  pink Starter Menu
-                </a>
-                <button
-                  className='text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none'
-                  type='button'
-                  onClick={() => setMenuOpen(!menuOpen)}>
-                  <i className='fas fa-bars'></i>
-                </button>
+      <div className='py-4 bg-slate-100 dark:bg-slate-800'>
+        <div className='w-11/12 mx-auto'>
+          <nav className='flex items-center justify-between'>
+              <div className='flex items-center lg:w-auto px-4 lg:static lg:justify-start'>
+                <FontAwesomeIcon
+                  icon={faBars}
+                  className='fa-2xl mr-3 cursor-pointer text-slate-800  dark:text-slate-100'
+                  onClick={openSideBar}
+                />
+                <Link href='/' passHref legacyBehavior>
+                  <Logo width={200} height={60}/>
+                </Link>
               </div>
-              <div
-                className={
-                  "lg:flex flex-grow items-center" +
-                  (menuOpen ? " flex" : " hidden")
-                }
-                id='example-navbar-info'>
-                <ul className='flex flex-col lg:flex-row list-none lg:ml-auto'>
-                  <li className='nav-item'>
-                    <a
-                      className='px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75'
-                      href='#pablo'>
-                      <i className='fas fa-globe text-lg leading-lg text-white opacity-75'></i>
+            <div
+              className='flex flex-grow-0 items-center md:flex-grow'
+              id='example-navbar-info'>
+              <ul className='hidden md:flex lg:flex-row list-none ml-auto'>
+                <li className='nav-item mr-4'>
+                  <Link href='/about' passHref legacyBehavior>
+                    <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
+                      About Us
                     </a>
-                  </li>
-                  <li className='nav-item'>
-                    <a
-                      className='px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75'
-                      href='#pablo'>
-                      <i className='fas fa-user text-lg leading-lg text-white opacity-75'></i>
+                  </Link>
+                </li>
+                <li className='nav-item mr-4'>
+                  <Link href='/contact' passHref legacyBehavior>
+                    <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
+                      Contact Us
                     </a>
-                  </li>
-                  <li className='nav-item'>
-                    <a
-                      className='px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75'
-                      href='#pablo'>
-                      <i className='fas fa-cog text-lg leading-lg text-white opacity-75'></i>
-                    </a>
-                  </li>
-                </ul>
-                {renderThemeChanger()}
-              </div>
+                  </Link>
+                </li>
+              </ul>
+              {renderThemeChanger()}
             </div>
           </nav>
         </div>
