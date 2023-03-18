@@ -1,4 +1,5 @@
 module.exports = {
+  mode: "jit",
   darkMode: "class", // or 'media' or 'class'
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -7,6 +8,16 @@ module.exports = {
   theme: {
     typography: (theme) => ({}),
     extend: {
+      colors: {
+        primary: '#204e4a',
+        secondary: '#297045',
+        success: '#2e933c',
+        danger: '#dc3545',
+        warning: '#ecba82',
+        info: '#17a2b8',
+        light: '#f1f5f9',
+        dark: '#f1f5f9',
+      },
       screens: {
         sm: '480px',
         md: '768px',
