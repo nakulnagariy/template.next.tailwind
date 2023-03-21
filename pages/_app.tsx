@@ -11,6 +11,7 @@ import "../styles/globals.css";
 import "../components/TransferList/TransferList.scss"
 import '../components/Navbar/Sidebar.scss';
 import '../components/Footer/Footer.scss';
+import '../components/AddExpenseForm/AddExpenseForm.scss';
 
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -30,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         {/* <script src="https://kit.fontawesome.com/64805d2996.js" crossOrigin="anonymous"></script> */}
       </Head>
-      <ConfigProvider direction="rtl">
+      <ConfigProvider direction="ltr">
         <ThemeProvider enableSystem={true} attribute='class'>
         <Layout>
           <Component {...pageProps} />
