@@ -42,10 +42,11 @@ const AddExpenseForm: React.FC<Props> = ({ categories }) => {
       onFinishFailed={handleFormFinishFailed}
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
-      className='flex items-center justify-between my-6'>
+      className='w-full my-6 md:justify-around sm:justify-around'>
       <Form.Item
         label='Amount'
         name='amount'
+        className='w-full lg:w-1/7 md:w-1/2'
         rules={[
           {
             required: true,
@@ -56,21 +57,31 @@ const AddExpenseForm: React.FC<Props> = ({ categories }) => {
             message: 'Please enter a valid number',
           },
         ]}>
-        <InputNumber size='large' style={{ width: '100%' }} />
+        <InputNumber size='large' className='w-full' />
       </Form.Item>
 
       <Form.Item
         label='Description'
         name='description'
+        className='w-full lg:w-1/7 md:w-1/2'
         rules={[{ required: true, message: 'Please enter a description' }]}>
-        <Input size='large' style={{ width: '100%' }} />
+        <Input size='large' className='w-full' />
+      </Form.Item>
+
+      <Form.Item
+        label='Date'
+        name='date'
+        className='w-full lg:w-1/7 md:w-1/2'
+        rules={[{ required: true, message: 'Please select a date' }]}>
+        <DatePicker size='large' className='w-full' />
       </Form.Item>
 
       <Form.Item
         label='Category'
         name='category'
+        className='w-full lg:w-1/7 md:w-1/2'
         rules={[{ required: true, message: 'Please select a category' }]}>
-        <Select size='large' style={{ width: '100%' }}>
+        <Select size='large' className='w-full'>
           {categories.map((category) => (
             <Option key={category.id} value={category.name}>
               {category.name}
@@ -79,24 +90,20 @@ const AddExpenseForm: React.FC<Props> = ({ categories }) => {
         </Select>
       </Form.Item>
 
-      <Form.Item label='Comment' name='comment' rules={[{ required: false }]}>
-        <Input size='large' style={{ width: '100%' }} />
-      </Form.Item>
-
       <Form.Item
-        label='Date'
-        name='date'
-        rules={[{ required: true, message: 'Please select a date' }]}>
-        <DatePicker size='large' style={{ width: '100%' }} />
+        label='Comment' 
+        className='w-full lg:w-1/7 md:w-1/2 dark:text-slate-100' 
+        name='comment' 
+        rules={[{ required: false }]}>
+        <Input size='large' className='w-full' />
       </Form.Item>
 
-      <Form.Item className='mt-6'>
+      <Form.Item 
+        className='w-full flex-wrap mt-10 lg:w-1/7 md:w-1/2'>
         <Button
           type='ghost'
           htmlType='submit'
-          size='large'
-          style={{ width: '100%' }}
-          className='text-slate-100 bg-slate-800 h-14 dark:text-slate-800 dark:bg-slate-100'>
+          className='w-full text-slate-100 bg-slate-800 whitespace-normal h-auto py-3 dark:text-slate-800 dark:bg-slate-100'>
           Add new expense
         </Button>
       </Form.Item>
