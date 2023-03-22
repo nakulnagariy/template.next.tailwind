@@ -20,6 +20,7 @@
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "@tailwindcss/typography": "^0.5.2",
     "antd": "^5.3.1",
+    "dayjs": "^1.11.7",
     "next": "12.1.6",
     "next-themes": "^0.2.0",
     "react": "18.1.0",
