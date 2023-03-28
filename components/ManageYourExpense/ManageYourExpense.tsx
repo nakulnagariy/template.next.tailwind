@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   DatePicker,
   DatePickerProps,
@@ -13,6 +13,7 @@ import {
 } from 'antd';
 import type { SelectProps } from 'antd';
 import dayjs from 'dayjs';
+import Cookies from "js-cookie";
 
 interface Item {
   key: string;
@@ -22,16 +23,6 @@ interface Item {
   date: string;
 }
 
-const originData: Item[] = [];
-for (let i = 0; i < 100; i++) {
-  originData.push({
-    key: i.toString(),
-    description: `Test data ${i}`,
-    amount: 232,
-    comment: `London Park no. ${i}`,
-    date: dayjs().format('DD/MM/YYYY'),
-  });
-}
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean;
   dataIndex: string;
@@ -53,13 +44,10 @@ const EditableCell: React.FC<EditableCellProps> = ({
   ...restProps
 }) => {
   let inputNode;
-  switch (dataIndex) {
-    case 'amount':
-      inputNode = <InputNumber />;
-      break;
-    default:
-      inputNode = <Input />;
-      break;
+  if (dataIndex === 'amount') {
+    inputNode = <InputNumber />;
+  } else {
+    inputNode = <Input />;
   }
 
   return (
@@ -85,8 +73,38 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
 const ManageYourExpense: React.FC = () => {
   const [form] = Form.useForm();
-  const [data, setData] = useState(originData);
+  const [data, setData] = useState([]);
   const [editingKey, setEditingKey] = useState('');
+  const authorization = Cookies.get("Authorization");
+  
+  useEffect(() => {
+    const fetchData = () => {
+      fetch('http://localhost:8080/expense',{
+        headers: {
+          "Authorization": `Bearer ${authorization}`,
+        }
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          const tableData: any = [];
+          res.data.map((expense: any) => {
+            const { _id, amount, description, date, category, comment, updatedAt, user } = expense;
+            tableData.push({
+              key: _id,
+              description: description,
+              amount: amount,
+              comment: comment,
+              date: dayjs(date).format('DD/MM/YYYY')})
+          });
+          setData(tableData);
+        })
+        .catch((error) => {
+          // showWarningMessage();
+          console.log(error);
+        });
+    }
+    fetchData()
+  }, [])
 
   const isEditing = (record: Item) => record.key === editingKey;
 
@@ -107,27 +125,7 @@ const ManageYourExpense: React.FC = () => {
   };
 
   const save = async (key: React.Key) => {
-    try {
-      const row = (await form.validateFields()) as Item;
-
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.key);
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, {
-          ...item,
-          ...row,
-        });
-        setData(newData);
-        setEditingKey('');
-      } else {
-        newData.push(row);
-        setData(newData);
-        setEditingKey('');
-      }
-    } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
-    }
+    console.log('saving your changes')
   };
 
   const columns = [
@@ -144,48 +142,6 @@ const ManageYourExpense: React.FC = () => {
       editable: true,
     },
     {
-      title: 'Category',
-      dataIndex: 'category',
-      width: '20%',
-      render: (_: any, record: Item) => {
-        const options: SelectProps['options'] = [];
-
-        for (let i = 10; i < 36; i++) {
-          options.push({
-            label: i.toString(36) + i,
-            value: i.toString(36) + i,
-          });
-        }
-
-        const handleChange = (value: string[]) => {
-          console.log(`selected ${value}`);
-        };
-        const editable = isEditing(record);
-
-        const category: SelectProps['options'] = [
-          { label: 'a10', value: 'a10' },
-          { label: 'c12', value: 'c12' },
-        ];
-        const selectedCat = category.map((item) => item.label);
-        return editable ? (
-          <Space style={{ width: '100%' }} direction='vertical'>
-            <Select
-              mode='multiple'
-              allowClear
-              style={{ width: '100%' }}
-              placeholder='Please select'
-              defaultValue={['a10', 'c12']}
-              onChange={handleChange}
-              options={options}
-            />
-          </Space>
-        ) : (
-          <Typography.Text>{selectedCat.join(',')}</Typography.Text>
-        );
-      },
-    },
-
-    {
       title: 'Comment',
       dataIndex: 'comment',
       width: '20%',
@@ -194,16 +150,7 @@ const ManageYourExpense: React.FC = () => {
     {
       title: 'Date',
       dataIndex: 'date',
-      width: '15%',
-      render: (_: any, record: Item) => {
-        const editable = isEditing(record);
-
-        return editable ? (
-          <DatePicker defaultValue={dayjs()} format={'DD/MM/YYYY'} />
-        ) : (
-          <Typography.Text>{dayjs().format('DD/MM/YYYY')}</Typography.Text>
-        );
-      },
+      width: '15%'
     },
     {
       title: 'operation',
