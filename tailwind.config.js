@@ -5,9 +5,15 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  corePlugins: {
+    preflight: false,
+  },
   theme: {
     typography: (theme) => ({}),
     extend: {
+      width: {
+        '1/7': '14.2857143%',
+      },
       colors: {
         primary: '#204e4a',
         secondary: '#297045',

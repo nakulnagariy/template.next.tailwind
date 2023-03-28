@@ -73,7 +73,7 @@ const AddExpenseForm: React.FC<Props> = ({ categories }) => {
         name='date'
         className='w-full lg:w-1/7 md:w-1/2'
         rules={[{ required: true, message: 'Please select a date' }]}>
-        <DatePicker size='large' className='w-full' allowClear autoFocus format={"DD/MM/YYYY"}/>
+        <DatePicker size='large' className='w-full' />
       </Form.Item>
 
       <Form.Item
