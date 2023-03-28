@@ -1,27 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Button, message } from 'antd';
-import { useRouter } from 'next/router';
 
-interface LoginFormData {
+interface SignupFormData {
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
-const Login: React.FC = () => {
+type Props = {
+  onSuccess: (key: string) => void;
+};
+
+const Signup: React.FC<Props> = ({ onSuccess }) => {
   const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
   const showSuccessMessage = () => {
-    messageApi.info(`Logged in sucessfully, redirecting to manage page.`);
+    messageApi.info(`Signup successfully, Please login now.`);
   };
 
   const showWarningMessage = () => {
     messageApi.warning(`Something went wrong, please try again.`);
   };
 
-  const router = useRouter();
-  const handleSubmit = (data: LoginFormData) => {
+  const handleSubmit = (data: SignupFormData) => {
     const { email, password } = data;
-    fetch('http://localhost:8080/login', {
+    fetch('http://localhost:8080/signup', {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -37,7 +40,7 @@ const Login: React.FC = () => {
         form.resetFields();
         showSuccessMessage();
         setTimeout(() => {
-          router.push('/manage-expense');
+          onSuccess("login");
         }, 2000);
       })
       .catch((error) => {
@@ -68,9 +71,27 @@ const Login: React.FC = () => {
           <Input.Password />
         </Form.Item>
 
+        <Form.Item
+          label='Confirm Password'
+          name='confirmPassword'
+          dependencies={['password']}
+          rules={[
+            { required: true, message: 'Please confirm your password!' },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject('The two passwords do not match!');
+              },
+            }),
+          ]}>
+          <Input.Password />
+        </Form.Item>
+
         <Form.Item>
           <Button type='primary' htmlType='submit'>
-            Log in
+            Sign up
           </Button>
         </Form.Item>
       </Form>
@@ -78,4 +99,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Signup;

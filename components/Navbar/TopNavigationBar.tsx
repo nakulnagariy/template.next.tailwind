@@ -71,6 +71,13 @@ const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ openSideBar }) => {
                     </a>
                   </Link>
                 </li>
+                <li className='nav-item mr-4'>
+                  <Link href='/auth' passHref legacyBehavior>
+                    <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
+                      Login/SignUp
+                    </a>
+                  </Link>
+                </li>
               </ul>
               {renderThemeChanger()}
             </div>

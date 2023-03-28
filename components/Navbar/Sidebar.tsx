@@ -44,6 +44,14 @@ const Sidebar: React.FC<Props> = ({ isSidebarOpen, toggleSidebar }) => {
               </a>
             </Link>
           </li>
+          <li>
+            <Link href='/auth' passHref legacyBehavior>
+              <a
+                className='cursor-pointer text-slate-800 hover:bg-slate-800 hover:text-slate-100 dark:text-slate-100 dark:hover:bg-slate-100 dark:hover:text-slate-800'>
+                Login/SignUp
+              </a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>
