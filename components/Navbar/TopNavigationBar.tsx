@@ -50,13 +50,22 @@ const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ openSideBar }) => {
                   onClick={openSideBar}
                 />
                 <Link href='/' passHref legacyBehavior>
-                  <Logo width={200} height={60}/>
+                  <a>
+                    <Logo width={200} height={60}/>
+                  </a>
                 </Link>
               </div>
             <div
               className='flex flex-grow-0 items-center md:flex-grow'
               id='example-navbar-info'>
               <ul className='hidden md:flex lg:flex-row list-none ml-auto'>
+              <li className='nav-item mr-4'>
+                  <Link href='/manage-expense' passHref legacyBehavior>
+                    <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
+                    Manage Expense
+                    </a>
+                  </Link>
+                </li>
                 <li className='nav-item mr-4'>
                   <Link href='/about' passHref legacyBehavior>
                     <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>

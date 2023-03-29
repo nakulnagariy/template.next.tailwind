@@ -52,6 +52,14 @@ const Sidebar: React.FC<Props> = ({ isSidebarOpen, toggleSidebar }) => {
               </a>
             </Link>
           </li>
+          <li>
+            <Link href='/manage-expense' passHref legacyBehavior>
+              <a
+                className='cursor-pointer text-slate-800 hover:bg-slate-800 hover:text-slate-100 dark:text-slate-100 dark:hover:bg-slate-100 dark:hover:text-slate-800'>
+                Manage Expense
+              </a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>

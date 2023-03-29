@@ -10,6 +10,7 @@ interface LoginFormData {
 const Login: React.FC = () => {
   const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
+  const router = useRouter();
   const showSuccessMessage = () => {
     messageApi.info(`Logged in sucessfully, redirecting to manage page.`);
   };
@@ -17,8 +18,6 @@ const Login: React.FC = () => {
   const showWarningMessage = () => {
     messageApi.warning(`Something went wrong, please try again.`);
   };
-
-  const router = useRouter();
   const handleSubmit = (data: LoginFormData) => {
     const { email, password } = data;
     fetch('http://localhost:8080/login', {
