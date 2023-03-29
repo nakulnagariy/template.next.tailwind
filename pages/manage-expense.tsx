@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
-import ManageYourExpense from '../components/ManageYourExpense/ManageYourExpense';
+import ManageYourExpenses from '../components/ManageYourExpense/ManageYourExpenses';
 
 const ManageExpense: NextPage = () => {
   return (
     <>
       <section>
         <div className='w-11/12 mx-auto my-10'>
-          <ManageYourExpense />
+          <ManageYourExpenses />
         </div>
       </section>
     </>
