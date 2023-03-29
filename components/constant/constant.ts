@@ -20,5 +20,6 @@ export const EXPENSE_DELETED = 'Your expense deleted successfully';
 export const DELETE_CONFIRM = 'Are you sure delete this task?';
 export const DELETE_CONFIRM_DESC = 'Once deleted, cant be rolled back.';
 export const DATA_UPDATED = 'Data updated successfully.';
+export const LOGOUT_MSG = 'Logged out successfully.';
 export const EXPENSE_ADDED =
   'Expense added successfully, you can check it in the manage page.';
