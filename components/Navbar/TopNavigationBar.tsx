@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import Logo from '../Logo/Logo';
+import Logout from '../Logout/Logout';
+import Cookies from 'js-cookie';
 
 interface TopNavigationBarProps {
   openSideBar: () => void;
@@ -13,6 +15,7 @@ interface TopNavigationBarProps {
 const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ openSideBar }) => {
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const authorization = Cookies.get('Authorization');
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -43,26 +46,26 @@ const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ openSideBar }) => {
       <div className='py-4 bg-slate-100 dark:bg-slate-800'>
         <div className='w-11/12 mx-auto'>
           <nav className='flex items-center justify-between'>
-              <div className='flex items-center lg:w-auto px-4 lg:static lg:justify-start'>
-                <FontAwesomeIcon
-                  icon={faBars}
-                  className='fa-2xl mr-3 cursor-pointer text-slate-800  dark:text-slate-100'
-                  onClick={openSideBar}
-                />
-                <Link href='/' passHref legacyBehavior>
-                  <a>
-                    <Logo width={200} height={60}/>
-                  </a>
-                </Link>
-              </div>
+            <div className='flex items-center lg:w-auto px-4 lg:static lg:justify-start'>
+              <FontAwesomeIcon
+                icon={faBars}
+                className='fa-2xl mr-3 cursor-pointer text-slate-800  dark:text-slate-100'
+                onClick={openSideBar}
+              />
+              <Link href='/' passHref legacyBehavior>
+                <a>
+                  <Logo width={200} height={60} />
+                </a>
+              </Link>
+            </div>
             <div
               className='flex flex-grow-0 items-center md:flex-grow'
               id='example-navbar-info'>
               <ul className='hidden md:flex lg:flex-row list-none ml-auto'>
-              <li className='nav-item mr-4'>
+                <li className='nav-item mr-4'>
                   <Link href='/manage-expense' passHref legacyBehavior>
                     <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
-                    Manage Expense
+                      Manage Expense
                     </a>
                   </Link>
                 </li>
@@ -81,11 +84,15 @@ const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ openSideBar }) => {
                   </Link>
                 </li>
                 <li className='nav-item mr-4'>
-                  <Link href='/auth' passHref legacyBehavior>
-                    <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
-                      Login/SignUp
-                    </a>
-                  </Link>
+                  {!authorization ? (
+                    <Link href='/auth' passHref legacyBehavior>
+                      <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
+                        Login/SignUp
+                      </a>
+                    </Link>
+                  ) : (
+                    <Logout />
+                  )}
                 </li>
               </ul>
               {renderThemeChanger()}

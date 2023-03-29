@@ -5,6 +5,7 @@ import {
   EXPENSE_DELETED,
   EXPENSE_ADDED,
   DATA_UPDATED,
+  LOGOUT_MSG,
 } from '../constant/constant';
 
 export const showExpenseFetchSuccessMessage = (messageApi: any) => {
@@ -28,5 +29,9 @@ export const showDeleteMessage = (messageApi: any) => {
 };
 
 export const showDataUpdatedMessage = (messageApi: any) => {
-    messageApi.info(DATA_UPDATED);
-  };
+  messageApi.info(DATA_UPDATED);
+};
+
+export const showLogoutMessage = (messageApi: any) => {
+  messageApi.info(LOGOUT_MSG);
+};
