@@ -8,10 +8,8 @@ import "tailwindcss/tailwind.css";
 import "../styles/globals.css";
 // styles
 
-import "../components/TransferList/TransferList.scss"
 import '../components/Navbar/Sidebar.scss';
 import '../components/Footer/Footer.scss';
-import '../components/AddExpenseForm/AddExpenseForm.scss';
 
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 import '@fortawesome/fontawesome-svg-core/styles.css'
