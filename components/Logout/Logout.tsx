@@ -43,11 +43,11 @@ const Logout: React.FC = () => {
   return (
     <>
       {contextHolder}
-      <Button type="link" onClick={handleLogout} className="px-0 py-0 h-0 text-inherit underline">
-        <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
+      <Link href="/auth" passHref legacyBehavior>
+        <a onClick={handleLogout} className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
         Logout
         </a>
-      </Button>
+      </Link>
     </>
   );
 };

@@ -1,5 +1,9 @@
-.editable-row .ant-form-item-explain {
-  position: absolute;
-  top: 100%;
-  font-size: 12px;
+.text-label label{
+  --tw-text-opacity: 1;
+  color: rgb(30 41 59 / var(--tw-text-opacity)) !important;
+}
+
+.text-label-dark label{
+  --tw-text-opacity: 1;
+  color: rgb(241 245 249 / var(--tw-text-opacity)) !important;
 }

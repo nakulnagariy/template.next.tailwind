@@ -11,8 +11,8 @@ const Home: NextPage = () => {
         </div>
         <Hero
           imageSrc='/wallet.jpg'
-          ctaLink='/add-new-expense'
-          ctaText='Add new Expense'
+          ctaLink='/manage-expense'
+          ctaText='Manage your expenses'
         />
       </section>
     </>
