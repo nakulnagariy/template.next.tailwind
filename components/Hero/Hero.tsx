@@ -27,7 +27,9 @@ const Hero: React.FC<HeroProps> = ({ imageSrc, ctaText, ctaLink }) => {
             Master Your Budget with Our <span className='mt-2 inline-block align-sub'><Logo width={350} height={40}/></span> Today!
           </h1>
           <p className='text-lg md:text-xl mb-8'>
-            Take charge of your finances and stay on top of your budget with our easy-to-use web app. Sign up now and start saving for your financial goals!
+            Take charge of your finances and stay on top of your budget with our easy-to-use web app. <Link href='/auth' passHref legacyBehavior>
+            Sign up
+          </Link> now and start saving for your financial goals!
           </p>
           <Space direction='vertical' className='w-full'>
             <Button

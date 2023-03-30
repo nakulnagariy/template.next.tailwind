@@ -61,7 +61,7 @@ const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ openSideBar }) => {
 
   const renderLoginLogout = () => {
     return (
-      <li className='nav-item mr-4'>
+      <li className='nav-item mr-2'>
         {!isUserLoggedIn ? (
           <Link href='/auth' passHref legacyBehavior>
             <a className={`flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100`}>
@@ -92,7 +92,7 @@ const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ openSideBar }) => {
               </Link>
             </div>
             <div
-              className='flex flex-grow-0 items-center md:flex-grow'
+              className='flex flex-grow-0 items-center w-full md:flex-grow'
               id='example-navbar-info'>
               <ul className='hidden md:flex lg:flex-row list-none ml-auto mb-0'>
                 <li className='nav-item mr-4'>
