@@ -190,6 +190,14 @@ const ManageYourExpense: React.FC = () => {
     fetchData();
   }, [isModalOpen, isExpenseAdded]);
 
+  const renderSummary = () => (
+    <Table.Summary fixed>
+      <Table.Summary.Row>
+        <Table.Summary.Cell index={0}><Title level={3}>{totalExpenseAmount}</Title></Table.Summary.Cell>
+        <Table.Summary.Cell index={1}><Title level={5}>This is a total of all expenses.</Title></Table.Summary.Cell>
+      </Table.Summary.Row>
+    </Table.Summary>
+  )
   return (
     <div className='manage-expense-wrapper'>
       {contextHolder}
@@ -208,14 +216,7 @@ const ManageYourExpense: React.FC = () => {
         columns={columns}
         dataSource={data}
         bordered
-        summary={() => (
-          <Table.Summary fixed>
-            <Table.Summary.Row>
-              <Table.Summary.Cell index={0}><Title level={3}>{totalExpenseAmount}</Title></Table.Summary.Cell>
-              <Table.Summary.Cell index={1}><Title level={5}>This is a total of all expenses.</Title></Table.Summary.Cell>
-            </Table.Summary.Row>
-          </Table.Summary>
-        )}
+        summary={renderSummary}
       />
     </div>
   );
