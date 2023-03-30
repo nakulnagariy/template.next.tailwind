@@ -13,8 +13,8 @@ const LoginSignupTabs: React.FC = () => {
   };
 
   return (
-    <div className='flex flex-col w-11/12 mx-auto h-fit my-20'>
-    <Tabs activeKey={activeTab} onChange={handleTabChange} className='w-1/2 mx-auto'>
+    <div className='flex flex-col w-full mx-auto md:w-11/12 md:mx-auto sm:w-full h-fit my-20'>
+    <Tabs activeKey={activeTab} onChange={handleTabChange} className='w-10/12 mx-auto md:w-1/2 sm:w-1/2'>
       <TabPane tab="Log In" key="login">
         <Login />
       </TabPane>

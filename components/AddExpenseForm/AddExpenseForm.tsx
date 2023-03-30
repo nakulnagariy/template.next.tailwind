@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Form,
   Input,
@@ -11,6 +11,7 @@ import {
 import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
+import { useTheme } from 'next-themes';
 import { CATEGORY } from '../constant/constant';
 import {
   showExpenseAddedSuccessMessage,
@@ -26,7 +27,9 @@ const AddExpenseForm: React.FC<EProps> = ({ isDataAdded }) => {
   const [formError, setFormError] = useState('');
   const [messageApi, contextHolder] = message.useMessage();
   const router = useRouter();
+  const { theme } = useTheme();
   const authorization = Cookies.get('Authorization');
+  const lebelClass = `w-full lg:w-1/7 md:w-1/2 ${theme === 'dark' ? 'text-label-dark' : 'text-label' }`
 
   const handleError = (error: any) => {
     if (error.statusText === 'Unauthorized') {
@@ -41,6 +44,13 @@ const AddExpenseForm: React.FC<EProps> = ({ isDataAdded }) => {
 
   const handleFormSubmit = async (formData: FormData) => {
     // Handle form submission here
+    if(!authorization) {
+      const error = {
+        statusText: 'Unauthorized'
+      }
+      handleError(error);
+      return;
+    }
     const {
       amount = '',
       description = '',
@@ -96,7 +106,7 @@ const AddExpenseForm: React.FC<EProps> = ({ isDataAdded }) => {
         <Form.Item
           label='Amount'
           name='amount'
-          className='w-full lg:w-1/7 md:w-1/2'
+          className={lebelClass}
           rules={[
             {
               required: true,
@@ -113,7 +123,7 @@ const AddExpenseForm: React.FC<EProps> = ({ isDataAdded }) => {
         <Form.Item
           label='Description'
           name='description'
-          className='w-full lg:w-1/7 md:w-1/2'
+          className={lebelClass}
           rules={[{ required: true, message: 'Please enter a description' }]}>
           <Input size='large' className='w-full' />
         </Form.Item>
@@ -121,7 +131,7 @@ const AddExpenseForm: React.FC<EProps> = ({ isDataAdded }) => {
         <Form.Item
           label='Date'
           name='date'
-          className='w-full lg:w-1/7 md:w-1/2'
+          className={lebelClass}
           rules={[{ required: true, message: 'Please select a date' }]}>
           <DatePicker size='large' className='w-full' />
         </Form.Item>
@@ -129,7 +139,7 @@ const AddExpenseForm: React.FC<EProps> = ({ isDataAdded }) => {
         <Form.Item
           label='Category'
           name='category'
-          className='w-full lg:w-1/7 md:w-1/2'
+          className={lebelClass}
           rules={[{ required: true, message: 'Please select a category' }]}>
           <Select size='large' className='w-full'>
             {CATEGORY.map((category) => (
@@ -142,7 +152,7 @@ const AddExpenseForm: React.FC<EProps> = ({ isDataAdded }) => {
 
         <Form.Item
           label='Comment'
-          className='w-full lg:w-1/7 md:w-1/2 dark:text-slate-100'
+          className={lebelClass}
           name='comment'
           rules={[{ required: false }]}>
           <Input size='large' className='w-full' />
