@@ -35,9 +35,7 @@ const Login: React.FC = () => {
       .then((data) => {
         form.resetFields();
         showSuccessMessage();
-        setTimeout(() => {
-          router.push('/manage-expense');
-        }, 2000);
+        router.push('/manage-expense');
       })
       .catch((error) => {
         showWarningMessage();
