@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import Logo from '../Logo/Logo';
 
 interface Props {
   isSidebarOpen: boolean;
@@ -13,7 +14,11 @@ const Sidebar: React.FC<Props> = ({ isSidebarOpen, toggleSidebar }) => {
         isSidebarOpen ? 'open' : ''
       } bg-slate-100 dark:bg-slate-800`}>
       <div className='sidebar-header border-b-2 border-b-slate-800 dark:border-b-slate-100'>
-        <h3>My Sidebar</h3>
+        <Link href='/' passHref legacyBehavior>
+          <a>
+            <Logo width={200} height={60} />
+          </a>
+        </Link>
         <button className='close-btn' onClick={toggleSidebar}>
           &times;
         </button>

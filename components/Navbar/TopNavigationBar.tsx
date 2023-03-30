@@ -5,8 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import Logo from '../Logo/Logo';
-import Logout from '../Logout/Logout';
 import Cookies from 'js-cookie';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+
+
+const DynamicLogout = dynamic(() => import('../Logout/Logout'), {
+  loading: () => <p>loading...</p>,
+});
 
 interface TopNavigationBarProps {
   openSideBar: () => void;
@@ -16,9 +22,20 @@ const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ openSideBar }) => {
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const authorization = Cookies.get('Authorization');
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const router = useRouter();
+
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if(!!authorization) {
+      setIsUserLoggedIn(true);
+    } else {
+      setIsUserLoggedIn(false);
+    }
+  }, [authorization]);
 
   const renderThemeChanger = () => {
     if (!mounted) return null;
@@ -41,6 +58,22 @@ const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ openSideBar }) => {
       );
     }
   };
+
+  const renderLoginLogout = () => {
+    return (
+      <li className='nav-item mr-4'>
+        {!isUserLoggedIn ? (
+          <Link href='/auth' passHref legacyBehavior>
+            <a className={`flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100`}>
+              Login/SignUp
+            </a>
+          </Link>
+        ) : (
+          <DynamicLogout />
+        )}
+      </li>
+    );
+  };
   return (
     <>
       <div className='py-4 bg-slate-100 dark:bg-slate-800'>
@@ -61,39 +94,29 @@ const TopNavigationBar: React.FC<TopNavigationBarProps> = ({ openSideBar }) => {
             <div
               className='flex flex-grow-0 items-center md:flex-grow'
               id='example-navbar-info'>
-              <ul className='hidden md:flex lg:flex-row list-none ml-auto'>
+              <ul className='hidden md:flex lg:flex-row list-none ml-auto mb-0'>
                 <li className='nav-item mr-4'>
                   <Link href='/manage-expense' passHref legacyBehavior>
-                    <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
+                    <a className={`flex items-center text-md uppercase font-bold leading-snug text-slate-800 ${router.pathname === '/manage-expense' && 'active'} hover:opacity-75 dark:text-slate-100`}>
                       Manage Expense
                     </a>
                   </Link>
                 </li>
                 <li className='nav-item mr-4'>
                   <Link href='/about' passHref legacyBehavior>
-                    <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
+                    <a className={`flex items-center text-md uppercase font-bold leading-snug text-slate-800 ${router.pathname === '/about' && 'active'} hover:opacity-75 dark:text-slate-100`}>
                       About Us
                     </a>
                   </Link>
                 </li>
                 <li className='nav-item mr-4'>
                   <Link href='/contact' passHref legacyBehavior>
-                    <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
+                    <a className={`flex items-center text-md uppercase font-bold leading-snug text-slate-800 ${router.pathname === '/contact' && 'active'} hover:opacity-75 dark:text-slate-100`}>
                       Contact Us
                     </a>
                   </Link>
                 </li>
-                <li className='nav-item mr-4'>
-                  {!authorization ? (
-                    <Link href='/auth' passHref legacyBehavior>
-                      <a className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
-                        Login/SignUp
-                      </a>
-                    </Link>
-                  ) : (
-                    <Logout />
-                  )}
-                </li>
+                {renderLoginLogout()}
               </ul>
               {renderThemeChanger()}
             </div>

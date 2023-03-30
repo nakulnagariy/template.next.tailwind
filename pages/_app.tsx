@@ -7,7 +7,7 @@ import "antd/dist/reset.css";
 import "tailwindcss/tailwind.css";
 import "../styles/globals.css";
 // styles
-
+import '../components/AddExpenseForm/AddExpenseForm.scss'
 import '../components/Navbar/Sidebar.scss';
 import '../components/Footer/Footer.scss';
 
