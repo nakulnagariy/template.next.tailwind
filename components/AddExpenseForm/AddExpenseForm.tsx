@@ -44,6 +44,13 @@ const AddExpenseForm: React.FC<EProps> = ({ isDataAdded }) => {
 
   const handleFormSubmit = async (formData: FormData) => {
     // Handle form submission here
+    if(!authorization) {
+      const error = {
+        statusText: 'Unauthorized'
+      }
+      handleError(error);
+      return;
+    }
     const {
       amount = '',
       description = '',
