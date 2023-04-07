@@ -5,9 +5,7 @@ const ManageExpense: NextPage = () => {
   return (
     <>
       <section>
-        <div className='w-11/12 mx-auto my-10'>
-          <ManageYourExpenses />
-        </div>
+        <ManageYourExpenses />
       </section>
     </>
   );

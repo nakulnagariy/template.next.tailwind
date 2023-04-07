@@ -7,8 +7,11 @@ import {
 } from '../utils/util';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
+interface LogoutProps {
+  classes: string;
+}
 
-const Logout: React.FC = () => {
+const Logout: React.FC<LogoutProps> = ({ classes }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const router = useRouter();
   const authorization = Cookies.get('Authorization');
@@ -31,7 +34,7 @@ const Logout: React.FC = () => {
         return res.json();
       })
       .then((data) => {
-        Cookies.remove('Authorization')
+        Cookies.remove('Authorization');
         showLogoutMessage(messageApi);
         router.push('/auth');
       })
@@ -43,9 +46,9 @@ const Logout: React.FC = () => {
   return (
     <>
       {contextHolder}
-      <Link href="/auth" passHref legacyBehavior>
-        <a onClick={handleLogout} className='flex items-center text-md uppercase font-bold leading-snug text-slate-800 hover:opacity-75 dark:text-slate-100'>
-        Logout
+      <Link href='/auth' passHref legacyBehavior>
+        <a onClick={handleLogout} className={classes}>
+          Logout
         </a>
       </Link>
     </>
