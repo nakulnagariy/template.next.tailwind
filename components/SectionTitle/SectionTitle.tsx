@@ -1,7 +1,14 @@
 import React from "react";
-import Container from "./container";
+import Container from "../Container/Container";
 
-export default function SectionTitle(props) {
+interface SectionTitleProps {
+  align?: string;
+  pretitle?: string;
+  title?: string;
+  children?: string | React.ReactNode;
+}
+
+const SectionTitle: React.FC<SectionTitleProps> = (props) => {
   return (
     <Container
       className={`flex w-full flex-col mt-4 ${
@@ -27,3 +34,5 @@ export default function SectionTitle(props) {
     </Container>
   );
 }
+
+export default SectionTitle;

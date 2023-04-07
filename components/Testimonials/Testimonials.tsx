@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Container from "./container";
+import Container from "../Container/Container";
 
 import userOneImg from "../../public/img/user1.jpg";
 import userTwoImg from "../../public/img/user2.jpg";
@@ -11,7 +11,7 @@ export default function Testimonials() {
     <Container>
       <div className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3">
         <div className="lg:col-span-2 xl:col-auto">
-          <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
+          <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-gray-800">
             <p className="text-2xl leading-normal ">
               Share a real <Mark>testimonial</Mark>
               that hits some of your benefits from one of your popular customer.
@@ -25,9 +25,9 @@ export default function Testimonials() {
           </div>
         </div>
         <div className="">
-          <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
+          <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-gray-800">
             <p className="text-2xl leading-normal ">
-              Make sure you only pick the <Mark>right sentence</Mark>
+              Make sure you only pick the right sentence
               to keep it short and simple.
             </p>
 
@@ -39,7 +39,7 @@ export default function Testimonials() {
           </div>
         </div>
         <div className="">
-          <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
+          <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-gray-800">
             <p className="text-2xl leading-normal ">
               This is an <Mark>awesome</Mark> landing page template I&apos;ve seen. I
               would use this for anything.

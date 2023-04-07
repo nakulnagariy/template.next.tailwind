@@ -19,6 +19,7 @@ import {
   showUnautorizedMessage,
 } from '../utils/util';
 import { EProps, FormData } from '../../types';
+import Container from '../Container/Container';
 
 const { Option } = Select;
 
@@ -93,7 +94,7 @@ const AddExpenseForm: React.FC<EProps> = ({ isDataAdded }) => {
   };
 
   return (
-    <div>
+    <>
       {contextHolder}
       <Form
         form={form}
@@ -163,11 +164,11 @@ const AddExpenseForm: React.FC<EProps> = ({ isDataAdded }) => {
             type='ghost'
             htmlType='submit'
             className='w-full text-slate-100 bg-slate-800 whitespace-normal h-auto py-3 dark:text-slate-800 dark:bg-slate-100'>
-            Add new expense
+            Add expense
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </>
   );
 };
 

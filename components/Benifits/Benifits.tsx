@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Container from "./container";
+import Container from "../Container/Container";
 
 export default function Benefits(props: any) {
   const { data } = props;

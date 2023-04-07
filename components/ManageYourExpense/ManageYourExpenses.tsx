@@ -17,8 +17,9 @@ import { Item } from '../../types';
 import Error from 'next/error';
 import { DELETE_CONFIRM, DELETE_CONFIRM_DESC } from '../constant/constant';
 import { DeleteOutlined } from '@ant-design/icons/lib/icons';
+import Container from '../Container/Container';
 const { confirm } = Modal;
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const ManageYourExpense: React.FC = () => {
   const [data, setData] = useState([]);
@@ -193,13 +194,13 @@ const ManageYourExpense: React.FC = () => {
   const renderSummary = () => (
     <Table.Summary fixed>
       <Table.Summary.Row>
-        <Table.Summary.Cell index={0}><Title level={3}>{totalExpenseAmount}</Title></Table.Summary.Cell>
-        <Table.Summary.Cell index={1}><Title level={5}>This is a total of all expenses.</Title></Table.Summary.Cell>
+        <Table.Summary.Cell index={0}><Title level={4}>{totalExpenseAmount}</Title></Table.Summary.Cell>
+        <Table.Summary.Cell index={1}><Text strong>This is a total of all expenses.</Text></Table.Summary.Cell>
       </Table.Summary.Row>
     </Table.Summary>
   )
   return (
-    <div className='manage-expense-wrapper'>
+    <Container>
       {contextHolder}
       {isModalOpen && (
         <ExpenseModal
@@ -208,9 +209,7 @@ const ManageYourExpense: React.FC = () => {
           expenseID={editExpenseID}
         />
       )}
-      <div className='w-11/12 py-4'>
-        <AddExpenseForm isDataAdded={handleExpenseAdded} />
-      </div>
+      <AddExpenseForm isDataAdded={handleExpenseAdded} />
       <Table
         className='bg-slate-100 text-slate-800 dark:text-slate-100 dark:bg-slate-800'
         columns={columns}
@@ -218,7 +217,7 @@ const ManageYourExpense: React.FC = () => {
         bordered
         summary={renderSummary}
       />
-    </div>
+    </Container>
   );
 };
 
