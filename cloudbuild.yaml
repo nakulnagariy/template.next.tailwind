@@ -16,9 +16,9 @@ steps:
     args:
       - app
       - deploy
-      - --version=${0.1.0}
-      - --project=${uplifted-plate-383115}
+      - --version=0.1.0
+      - --project=uplifted-plate-383115
       - --quiet
     env:
       - CLOUDSDK_COMPUTE_ZONE=asia-south1
-      - CLOUDSDK_CORE_PROJECT=${uplifted-plate-383115}
+      - CLOUDSDK_CORE_PROJECT=uplifted-plate-383115
