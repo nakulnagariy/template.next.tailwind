@@ -157,7 +157,7 @@ export default function PopupWidget() {
                         />
                         {errors.name && (
                           <div className="mt-1 text-sm text-red-400 invalid-feedback">
-                            {errors.name.message}
+                            {errors?.name?.message}
                           </div>
                         )}
                       </div>
