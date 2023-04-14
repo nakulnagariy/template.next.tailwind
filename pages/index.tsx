@@ -20,7 +20,7 @@ const Home: NextPage = () => {
       <SectionTitle
         pretitle='Our Benefits'
         title=' Why should you use our Budget Manager'>
-        Budget Manager is a free landing page & marketing website template for startups
+        Budget Manager is a free management system & marketing website template for startups
         and indie projects. Its built with Next.js & TailwindCSS. And its
         completely open-source.
       </SectionTitle>
